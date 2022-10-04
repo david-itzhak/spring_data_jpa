@@ -21,8 +21,7 @@ public class MainController {
 
     @GetMapping("/employees/{employeeId}")
     public Employee getEmployee(@PathVariable int employeeId) {
-        Employee employee = employeeService.getEmployee(employeeId);
-        return employee;
+        return employeeService.getEmployee(employeeId);
     }
 
 
@@ -40,9 +39,13 @@ public class MainController {
 
     @DeleteMapping("/employees/{employeeId}")
     public String deleteEmployee(@PathVariable int employeeId) {
-        Employee employee = employeeService.getEmployee(employeeId);
         employeeService.deleteEmployee(employeeId);
         return String.format("Employee with id: %d was deleted", employeeId);
+    }
+
+    @GetMapping("/employees/name/{name}")
+    public List<Employee> showAllEmployeesByName(@PathVariable String name) {
+        return employeeService.findAllByName(name);
     }
 
 }
